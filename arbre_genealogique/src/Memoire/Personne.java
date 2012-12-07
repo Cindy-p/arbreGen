@@ -1,3 +1,5 @@
+// javadoc terminée
+
 package Memoire;
 
 import java.util.Arrays;

@@ -1,5 +1,10 @@
 package Memoire;
 
+
+/**
+ * Cette classe 
+ *
+ */
 public class Photo {
     private String nomImage;
     
