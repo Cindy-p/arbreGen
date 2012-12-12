@@ -3,27 +3,14 @@ package Memoire;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-
-/**
- * Cette classe modélise les liens entre les personnes de l'arbre généalogique.<br> 
- * Un lien est caractérisé par son type et les deux personnes concernées.<br>
- * On peut créer, modifier et supprimer un lien.
- */
-
 public class Lien {
 	private String typeLien;
 	private Personne origine;
 	private Personne destination;
 	
 	private static String[] liensExistants = {"marital", "fraternel", "parental"};
-	private static String[] liensInit = {"marié à", "mariée à", "divorcé de", "divorcée de", "frère de", "soeur de", "père de", "mère de"};
+	private static String[] liensInit = {"mariÃ© Ã ", "mariÃ©e Ã ", "divorcÃ© de", "divorcÃ©e de", "frÃ¨re de", "soeur de", "pÃ¨re de", "mÃ¨re de"};
 	
-	
-	/**
-	 * @param typeLien Type de lien entre deux personnes
-	 * @param origine Première personne concernée par le lien
-	 * @param destination Deuxième personne concernée par le lien
-	 */
 	public Lien(String typeLien, Personne origine, Personne destination) {
 		super();
 		this.typeLien = typeLien;
@@ -31,54 +18,39 @@ public class Lien {
 		this.destination = destination;
 	}
 	
+	public Lien(){
+		
+	}
+
 //----------------------------------------------- GETTERS AND SETTERS	
-	/**
-	 * Récupère le type de lien
-	 * @return Type de lien entre deux personnes
-	 */
+	
 	public String getTypeLien() {
 		return typeLien;
 	}
+	
+	public void setTypeLien(String typeLien){
+		this.typeLien = typeLien;
+	}
 
-	/**
-	 * Récupère les informations sur la première personne concernée par le lien
-	 * @return Première personne concernée par le lien
-	 */
 	public Personne getOrigine() {
 		return origine;
 	}
 
-	/**
-	 * Modifie la première personne concernée par le lien
-	 * @param origine Première personne concernée par le lien
-	 */
 	public void setOrigine(Personne origine) {
 		this.origine = origine;
 	}
 
-	/**
-	 * Récupère les informations sur la deuxième personne concernée par le lien
-	 * @return Deuxième personne concernée par le lien
-	 */
 	public Personne getDestination() {
 		return destination;
 	}
 
-	/**
-	 * Modifie la deuxième personne concernée par le lien
-	 * @param destination Deuxième personne concernée par le lien
-	 */
 	public void setDestination(Personne destination) {
 		this.destination = destination;
 	}
 
 //----------------------------------------------- METHODES
 	
-	/**
-	 * 
-	 * @param choix
-	 */
-	//gérer le cas ou le lien n'est pas valide	
+//gï¿½rer le cas ou le lien n'est pas valide	
 	public void creerLien(int choix){
 		if(this.verifierLien())
 			this.initialiserLien(choix);
@@ -86,10 +58,6 @@ public class Lien {
 			System.out.println("Le lien saisi n'est pas disponible");
 	}
 	
-	/**
-	 * Vérifie que le lien entré par l'utilisateur correspond bien à un lien existant
-	 * @return 0 si le lien entré est incorrect, 1 si le lien entré est correct
-	 */
 	public boolean verifierLien(){
 		int i = 0;
 		this.typeLien = getTypeLien(); 
@@ -107,69 +75,63 @@ public class Lien {
 			}
 			i++;
 		}
+		
 		return false;
 	}
 	
-	
-	/**
-	 * 
-	 * @param choix
-	 * @return
-	 */
-	public String initialiserLien(int choix) {
-
-		if (typeLien == liensExistants[0]) {
-			switch (choix) {
-			case 1:
-				if (this.origine.isMasculin())
-					typeLien = "marié à";
-				else
-					typeLien = "mariée à";
+	public String initialiserLien(int choix ){
+		
+		if(typeLien == liensExistants[0]){
+			switch(choix){ 
+				case 1 :
+					if (this.origine.isMasculin())
+						typeLien = "mariÃ© Ã ";
+					else
+						typeLien = "mariÃ©e Ã ";
 				break;
-			case 2:
-				if (this.origine.isMasculin())
-					typeLien = "divorcé de";
-				else
-					typeLien = "divorcée de";
+				case 2 :
+					if (this.origine.isMasculin())
+						typeLien = "divorcÃ© de";
+					else
+						typeLien = "divorcÃ©e de";
 				break;
 			}
-
-		} else if (typeLien == liensExistants[1]) {
+		
+		}
+		else if(typeLien == liensExistants[1]){
 			if (this.origine.isMasculin())
-				typeLien = "frère de";
+				typeLien = "frÃ¨re de";
 			else
 				typeLien = "soeur de";
-		} else {
+		}
+		else {
 			if (this.origine.isMasculin())
-				typeLien = "père de";
+				typeLien = "pÃ¨re de";
 			else
-				typeLien = "mère de";
+				typeLien = "mÃ¨re de";
 		}
 		return typeLien;
 	}
 
-	
-	/**
-	 * 
-	 */
+	@Override
 	public String toString() {
 		String lienEcrit = "";
 			
 			if(!this.verifierLien()){
 				System.out.println(this.typeLien);
-				return "Le lien n'a pas pu être créé";
+				return "Le lien n'a pas pu Ãªtre crÃ©Ã©";
 			}
 			if(this.origine.isMasculin())
-				lienEcrit += this.origine.getNom() + " " + this.origine.getPrenoms().getFirst();
+				lienEcrit += this.origine.getNom() + " " + this.origine.getPrenoms()[0];
 			else
-				lienEcrit += this.origine.getNom() + " " + this.origine.getPrenoms().getFirst();
+				lienEcrit += this.origine.getNom() + " " + this.origine.getPrenoms()[0];
 			
 			lienEcrit += " " + this.typeLien + " ";
 			
 			if(this.destination.isMasculin())
-				lienEcrit += this.destination.getNom() + " " + this.destination.getPrenoms().getFirst();
+				lienEcrit += this.destination.getNom() + " " + this.destination.getPrenoms()[0];
 			else
-				lienEcrit += this.destination.getNom() + " " + this.destination.getPrenoms().getFirst();
+				lienEcrit += this.destination.getNom() + " " + this.destination.getPrenoms()[0];
 			
 			return lienEcrit;
 	}

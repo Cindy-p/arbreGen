@@ -2,10 +2,7 @@ package controleur;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.Scanner;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 import Memoire.*;
@@ -18,6 +15,7 @@ public class Memoire {
 	
 	public static void main(String[] args) throws ParseException {
 		
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 		int choix ;
 		System.out.println(" ***** Genealogie v0.1 *****\n\n");
@@ -34,6 +32,7 @@ public class Memoire {
 			
 				case 1 : 
 //					System.out.println("choix 1");
+					@SuppressWarnings("unused")
 					Arbre arbre = creerArbre();
 					
 					System.out.println(" ***** Genealogie v0.1 *****\n\n");
@@ -106,6 +105,7 @@ public class Memoire {
 
 // --------------------- ARBRE
 	
+	@SuppressWarnings("resource")
 	public static Arbre creerArbre() throws ParseException{
 		Scanner sc = new Scanner(System.in);
 		String nom = "";
@@ -145,6 +145,8 @@ public class Memoire {
 	
 // --------------------- PERSONNE
 	
+	
+	@SuppressWarnings({ "unused", "resource" })
 	public static void creerPersonne(){
 		Scanner sc = new Scanner(System.in);
 		String nom = "";

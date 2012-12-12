@@ -1,44 +1,27 @@
-// javadoc terminée
-
 package Memoire;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
-/**
- * Cette classe modélise les personnes présentes dans l'arbre.<br>
- * Une personne est caractérisée par un nom, plusieurs prénoms, son genre, sa photo, sa date de naissance et sa date de mort.<br>
- * On peut créer, modifier et supprimer une personne.
- */
+import java.util.ListIterator;
+
 public class Personne {
 	private String nom;
-	private LinkedList<String> prenoms;
+	private String[] prenoms;
 	private boolean masculin;
-	private Photo photo;
+	private String photo;
 	private String dateNaissance;
 	private String dateMort;
 
-	/**
-	 * Champs à remplir obligatoirement lors de la création d'une personne
-	 * @param nom Nom de la personne
-	 * @param prenoms Prénoms de la personne
-	 * @param masculin Genre de la personne
-	 * @param photo Photo de la personne
-	 */
-	public Personne(String nom, String[] prenoms, boolean masculin, Photo photo) {
+	public Personne(String nom, LinkedList<String> prenoms, boolean masculin, String photo) {
 		this.nom = nom;
 		this.prenoms = preparePrenoms(prenoms);
 		this.masculin = masculin;
 		this.photo = photo;
 	}
 
-	/**
-	 * Champs facultatifs lors de la création d'une personne
-	 * @param dateNaiss Date de naissance de la personne
-	 * @param dateMort Date de mort de la personne
-	 */
-	public Personne(String nom, String[] prenoms, boolean masculin,
-			Photo photo, String dateNaiss, String dateMort) {
+	public Personne(String nom, LinkedList<String> prenoms, boolean masculin,
+			String photo, String dateNaiss, String dateMort) {
 		this.nom = nom;
 		this.prenoms = preparePrenoms(prenoms);
 		this.masculin = masculin;
@@ -47,127 +30,79 @@ public class Personne {
 		this.dateMort = dateMort;
 	}
 
-	/**
-	 * Convertir 
-	 * @param prenoms
-	 * @return
-	 */
-	private LinkedList<String> preparePrenoms(String[] prenoms) {
-		LinkedList<String> lPr = new LinkedList<String>();
-		lPr.addAll(Arrays.asList(prenoms));
-		return lPr;
+	private String[] preparePrenoms(LinkedList<String> prenoms) {
+		String tab_prenoms[] = new String[prenoms.size()];
+		
+		for(int i = 0 ; i < tab_prenoms.length ; i++)
+			tab_prenoms[i] = prenoms.get(i);
+		
+		return tab_prenoms;
 	}
 
-	/**
-	 * Récupère la date de mort d'une personne
-	 * @return Date de mort
-	 */
 	public String getDateMort() {
 		return dateMort;
 	}
 
-	/**
-	 * Modifie la date de mort d'une personne
-	 * @param dateMort Date de mort
-	 */
 	public void setDateMort(String dateMort) {
 		this.dateMort = dateMort;
 	}
 
-	
-	/**
-	 * Récupère la date de naissance d'une personne
-	 * @return Date de naissance
-	 */
 	public String getDateNaissance() {
 		return dateNaissance;
 	}
 
-	/**
-	 * Modifie la date de naissance d'une personne
-	 * @param dateNaissance Date de naissance
-	 */
 	public void setDateNaissance(String dateNaissance) {
 		this.dateNaissance = dateNaissance;
 	}
 
-	/**
-	 * Permet de connaitre le genre d'une personne
-	 * @return 1 si la personne est un homme, 0 si la personne est une femme
-	 */
 	public boolean isMasculin() {
 		return masculin;
 	}
 
-	/**
-	 * Modifie le genre d'une personne
-	 * @param masculin Genre
-	 */
 	public void setMasculin(boolean masculin) {
 		this.masculin = masculin;
 	}
 
-	/**
-	 * Récupère le nom de la personne
-	 * @return Nom de la personne
-	 */
 	public String getNom() {
 		return nom;
 	}
 
-	/**
-	 * Modifie le nom de la personne
-	 * @param nom Nom de la personne
-	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
-	/**
-	 * Récupère les informations sur la photo d'une personne
-	 * @return Nom de la photo
-	 */
-	public Photo getPhoto() {
+	public String getPhoto() {
 		return photo;
 	}
 
-	/**
-	 * Modifie les informations sur la photo d'une personne
-	 * @param photo Photo
-	 */
-	public void setPhoto(Photo photo) {
+	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
 
-	/**
-	 * Récupère la liste des prénoms d'une personne
-	 * @return Liste des prénoms
-	 */
-	public LinkedList<String> getPrenoms() {
+	public String[] getPrenoms() {
 		return prenoms;
 	}
 
-	/**
-	 * Modifie la liste des prénoms d'une personne
-	 * @param prenoms Liste des prénoms
-	 */
-	public void setPrenoms(LinkedList<String> prenoms) {
+	public void setPrenoms(String[] prenoms) {
 		this.prenoms = prenoms;
 	}
 
-	/**
-	 * Affichage des informations d'une personne
-	 */
+	@Override
 	public String toString() {
-		String s = this.nom + " ";
-		for (int i = 0; i < this.prenoms.size(); i++) {
-			if (prenoms.get(i) != null)
-				s += prenoms.get(i) + ", ";
+		String s = "Nom : " + this.nom.toUpperCase() + "\n" + "Prenom(s) : ";
+		for (int i = 0; i < this.prenoms.length; i++) {
+			if (prenoms[i] != null)
+				s += prenoms[i] + " ";
 		}
+		s += "\n" + "Genre : ";
 		if (masculin)
 			s += "homme";
 		else
 			s += "femme";
+		if(this.dateNaissance != "" && this.dateMort != "")
+			s+= "\n" + "De " + this.dateNaissance + " ï¿½ " + this.dateMort;
+		
+		s+= "\n" + "Photo  : " + this.photo + "\n";
 		return s;
 	}
 }
